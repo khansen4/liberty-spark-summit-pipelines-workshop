@@ -29,7 +29,9 @@ liberty-spark-summit-pipelines-workshop/
 
 ## Workshop Walkthrough
 
-### 1 · Run the tests locally
+### 0 · Setup local test environment
+
+Run script in order to be able to run the test files locally.
 
 ```bash
 pip install -e ".[dev]"
