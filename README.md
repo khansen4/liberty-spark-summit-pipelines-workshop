@@ -29,16 +29,18 @@ liberty-spark-summit-pipelines-workshop/
 
 ## Workshop Walkthrough
 
-### 0 · Setup local test environment
+### 0 · Initial Setup
 
-Run script in order to be able to run the test files locally.
+Create a new repo and import the setup repo: https://github.com/khansen4/liberty-spark-summit-pipelines-workshop
+
+Once copied, run script in terminal to be able to run the test files locally.
 
 ```bash
 pip install -e ".[dev]"
 pytest
 ```
 
-### 2 · Explore the test suite
+### 1 · Explore the test suite
 
 Open `tests/test_claims_processor.py` and `tests/test_policy_lookup.py`:
 
@@ -46,7 +48,7 @@ Open `tests/test_claims_processor.py` and `tests/test_policy_lookup.py`:
 - Integration test for the full pipeline
 - Fixtures defined in `conftest.py`
 
-### 3 · Add a GitHub Actions workflow
+### 2 · Add a GitHub Actions workflow
 
 Create `.github/workflows/ci.yml` to run the test suite on every push and pull request:
 
@@ -67,7 +69,7 @@ jobs:
       - run: pytest
 ```
 
-### 4 · Extend the pipeline
+### 3 · Extend the pipeline
 
 Ideas to explore during the workshop:
 
