@@ -33,7 +33,7 @@ liberty-spark-summit-pipelines-workshop/
 
 Create a new repo and import the setup repo: https://github.com/khansen4/liberty-spark-summit-pipelines-workshop
 
-Once copied, run script in terminal to be able to run the test files locally.
+Open the repo locally, and run script in terminal to import pytest to test files locally.
 
 ```bash
 pip install -e ".[dev]"
