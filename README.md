@@ -48,32 +48,88 @@ Open `tests/test_claims_processor.py` and `tests/test_policy_lookup.py`:
 - Integration test for the full pipeline
 - Fixtures defined in `conftest.py`
 
-### 2 · Add a GitHub Actions workflow
+### 2 · Create a GitHub Actions workflow file
 
-Create `.github/workflows/ci.yml` to run the test suite on every push and pull request:
+Navigate to GitHub Actions and search for "Simple Workflow" template. By selecting the template file, it will be added to your repo.
 
-```yaml
-name: CI
+### 3 · Begin constructing the workflow file
 
-on: [push, pull_request]
+In the workflow file, rename the file to something like "simple_file.yaml" and update the name in file. 
 
+```
+# This is a basic workflow to help you get started with Actions
+
+name: simple_test
+```
+
+The template file providers a good starting spot with controls on main already added. This can be updated to include PR's but for the purpose of this demo we will leave it as is.
+
+```
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+```
+
+### 4 · Begin adding actions
+
+As discussed, for each action to be executed runners need to be installed. This are the virtual machines that will help to execute the code. In addition, the checkout step is added to allow to see the job. These are core components of an workflow file.
+
+```
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  test:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v6
+```
+
+#### 4.1 · Python Libraries
+
+Similar to running Python locally, python needs to be installed into the workflow for the runners to be able execute the code. To get the exact syntax to add it, we can search the market place for Python and it will provide us syntax for setting up Python into the workflow.
+
+```
+ - name: Setup Python
+        uses: actions/setup-python@v7.0.0
         with:
+          # Version range or exact version of Python or PyPy to use, using SemVer's version range syntax. Reads from .python-version if unset.
           python-version: "3.11"
+```
+
+#### 4.2 · PyTest
+
+Now that Python is loaded, we can run commands on it to execute the code. Like in command line the execution we want is to run PyTest.
+
+```
+      # command to run is pytests in the repo
+      - run: pytest
+```
+
+When checking the actions log we can see it failed, on the pytest indicating it can not be found. Like in command line, when first setting up the environment to run tests, pytest needs to be added into the environment. That is the same case here. So prior to running the pytest, it needs to be added into the action setup. 
+
+```
+# command to run is pytests in the repo
       - run: pip install -e ".[dev]"
       - run: pytest
 ```
 
-### 3 · Extend the pipeline
+### 5 · Final Step: Extend the pipeline
 
-Ideas to explore during the workshop:
+Now the workflow file has been created to run the pytests. As you can see some of the test are failing and the code needs to be updated. Once updating the actin will be successful. The pipeline can be further extended to include other things covered during the Code Quality workshop such as:
 
 - Add a lint step with `ruff check`
 - Add a format check with `ruff format --check`
 - Run tests against multiple Python versions using a matrix strategy
 - Add a status badge to this README
+
