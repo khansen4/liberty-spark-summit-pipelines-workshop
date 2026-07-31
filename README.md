@@ -126,7 +126,7 @@ When checking the actions log we can see it failed, on the pytest indicating it 
 
 ### 5 · Final Step: Extend the pipeline
 
-Now the workflow file has been created to run the pytests. As you can see some of the test are failing and the code needs to be updated. Once updating the actin will be successful. The pipeline can be further extended to include other things covered during the Code Quality workshop such as:
+Now the workflow file has been created to run the pytests. Check the logs it can be seen that all tests were successful. The pipeline can be further extended to include other things covered during the Code Quality workshop such as:
 
 - Add a lint step with `ruff check`
 - Add a format check with `ruff format --check`
