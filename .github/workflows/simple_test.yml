@@ -32,5 +32,6 @@ jobs:
           python-version: "3.11"
 
       # command to run is pytests in the repo
+      - run: pip install -e ".[dev]"
       - run: pytest
       
