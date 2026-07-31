@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "liberty-claims-demo-spark-summit"
+name = "liberty-spark-summit-pipelines-workshop"
 version = "0.1.0"
 description = "Liberty Mutual claims processing — code quality teaching demo"
 requires-python = ">=3.11"
@@ -13,6 +13,9 @@ dependencies = []
 dev = [
     "pytest>=8.0",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["claims_sample"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
